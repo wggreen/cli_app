@@ -20,7 +20,8 @@ class CliAppCommand extends Command {
 
     lines.forEach(line => {
       if (line !== "") {
-        this.log(line.trim())
+        const splitLine = line.slice(0, -1).split(",").join(" | ").trim()
+        this.log(splitLine)
       }
     })
   }
