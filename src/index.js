@@ -1,7 +1,11 @@
 const {Command, flags} = require('@oclif/command')
 
 /**
- * name of co, date of upcoming, name of contact, website[
+ * A command to read saved upcoming interview data and display it in the
+ * terminal
+ *
+ * Shape of expected interview data:
+ * name of co, date of upcoming, name of contact, website
 */
 class CliAppCommand extends Command {
   async run() {
@@ -10,34 +14,47 @@ class CliAppCommand extends Command {
     AcmeCo,07/02/21,Donald Duck,disney.com,donald@disney.com,
     GitHub,07/03/21,Nat Friedman,github.com,nat@github.com,
     `
-    const lines = csv.split("\n")
+    // TODO
+    // const csv = this.readDataFromFile('../path/to/file')
+    this.printHeaders()
+    this.printCells(csv)
+  }
 
-    const header = `Upcoming interviews\n`
-    this.log(header)
+  printCells(csv) {
+    csv
+      .split("\n")
+      .map(this.convertToCell)
+      .forEach(line => this.printLine(line))
+  }
 
-    const tableHeader = `Name   | Date   | Email   | Website   \n`
-    this.log(tableHeader)
+  // Take comma separated string and convert it to pipe separated, with no
+  // leading or trailing spac, and remove the final comma.
+  convertToCell(line) {
+    return line
+      .slice(0, -1)
+      .replace(/,/g, " | ")
+      .trim()
+  }
 
-    lines.forEach(line => {
-      if (line !== "") {
-        const splitLine = line.slice(0, -1).replace(/,/g, " | ").trim()
-        this.log(splitLine)
-      }
-    })
+  printLine(line) {
+    this.log(line)
+  }
+
+  printHeaders() {
+    [
+      `Upcoming interviews\n`,
+      `Name   | Date   | Email   | Website   \n`
+    ].forEach(line => this.printLine(line))
   }
 }
 
-CliAppCommand.description = `Describe the command here
-...
-Extra documentation goes here
-`
+CliAppCommand.description = `A command to read saved upcoming interview data and display it in the terminal`
 
 CliAppCommand.flags = {
   // add --version flag to show CLI version
   version: flags.version({char: 'v'}),
   // add --help flag to show CLI version
   help: flags.help({char: 'h'}),
-  name: flags.string({char: 'n', description: 'name to print'}),
 }
 
 module.exports = CliAppCommand
