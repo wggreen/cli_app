@@ -8,7 +8,7 @@ class CliAppCommand extends Command {
     const {flags} = this.parse(CliAppCommand)
     const csv = `
     AcmeCo,07/02/21,Donald Duck,disney.com,donald@disney.com,
-    GitHub,07/03/21,Nat Fridman,github.com,nat@github.com,
+    GitHub,07/03/21,Nat Friedman,github.com,nat@github.com,
     `
     const lines = csv.split("\n")
 
@@ -20,7 +20,7 @@ class CliAppCommand extends Command {
 
     lines.forEach(line => {
       if (line !== "") {
-        const splitLine = line.slice(0, -1).split(",").join(" | ").trim()
+        const splitLine = line.slice(0, -1).replace(/,/g, " | ").trim()
         this.log(splitLine)
       }
     })
