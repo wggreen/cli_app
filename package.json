@@ -1,0 +1,39 @@
+{
+  "name": "cli_app",
+  "version": "0.0.0",
+  "author": "@wgggreen",
+  "bin": {
+    "cli_app": "./bin/run"
+  },
+  "bugs": "https://github.com/maxbeizer/cli_app/issues",
+  "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-help": "^3.2.2"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/src"
+  ],
+  "homepage": "https://github.com/maxbeizer/cli_app",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "bin": "cli_app"
+  },
+  "repository": "maxbeizer/cli_app",
+  "scripts": {
+    "prepack": "oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}
